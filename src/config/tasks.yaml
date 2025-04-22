@@ -1,0 +1,61 @@
+generate_strategy_task:
+  description: >
+    Generate a complete and executable vulnerability scanning strategy for the target machine at {target_ip}.
+    The strategy should include a logical sequence of commands starting with reconnaissance and progressing through enumeration and exploitation phases.
+    Make sure the commands are suitable for a Kali Linux environment and require no manual tweaking.
+  expected_output: >
+    A JSON object containing a list of commands with explanations for each step, forming a comprehensive strategy for the scan.
+
+review_strategy_task:
+  description: >
+    Review the proposed vulnerability scan strategy for the target at {target_ip} based on the following description:
+    {scan_description}
+    
+    Ensure that:
+    - All commands are correct and safe to execute
+    - The strategy follows a logical progression (recon -> enumeration -> exploitation)
+    - No step is missing or redundant
+
+    Your final answer MUST be a JSON with a boolean field "approved" and a "feedback" field explaining your reasoning.
+  expected_output: >
+    A JSON object with:
+    - approved: true/false
+    - feedback: Text detailing what is good or needs to change.
+
+execute_strategy_task:
+  description: >
+    Execute each command from the approved strategy on the remote Kali Linux machine for the target {target_ip}.
+    Record the output of each command for review and analysis.
+    If any command produces an error or waits for input, forward the issue to the appropriate agent.
+  expected_output: >
+    A sequential log of the execution output from each command in the strategy, including any errors encountered.
+
+monitor_command_output_task:
+  description: >
+    Continuously analyze the terminal output from command execution.
+    Detect whether input is required or if the command is still running.
+    If input is needed, notify the agent responsible for deciding the next input.
+  expected_output: >
+    A JSON with:
+    - input_needed: true/false
+    - reasoning: Explanation of why the input is or isn’t needed based on the command output.
+
+handle_error_task:
+  description: >
+    When a command execution fails, analyze the error message and context to determine a fix.
+    Provide Linux shell commands that will solve the issue and a short explanation for each.
+  expected_output: >
+    A JSON with:
+    - fix: A list of shell commands to run
+    - explanation: A clear explanation of what went wrong and how each fix helps
+
+write_report_task:
+  description: >
+    Based on the final findings file, generate a Markdown report detailing vulnerabilities discovered on {target_ip}.
+    Structure the report with:
+    - Title
+    - Executive Summary
+    - Detailed Findings (with severity, description, affected components)
+    - Recommendations for remediation
+  expected_output: >
+    A professional, well-formatted Markdown (.md) report ready for submission to the client.
