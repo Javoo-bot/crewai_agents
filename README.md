@@ -1,4 +1,4 @@
-# README: Flujo de Trabajo de Agentes para Evaluación de Vulnerabilidades
+# Flujo de Trabajo de Agentes para Evaluación de Vulnerabilidades
 
 ## Flujo de Agentes
 
