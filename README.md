@@ -88,5 +88,5 @@ And produced a complete vulnerability report with:
 
 ---
 
-**🎯 Bottom Line**: I can build AI systems that replace manual workflows with intelligent automation, specifically in cybersecurity where precision and reliability are critical.
+> **🎯 Bottom Line**: I can build AI systems that replace manual workflows with intelligent automation, specifically in cybersecurity where precision and reliability are critical.
 ---
